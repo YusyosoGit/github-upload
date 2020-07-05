@@ -1,0 +1,7 @@
+#include "bsort.h"
+#include "simple_sel.h"
+#include "simple_ins.h"
+#include "shsort.h"
+#include "qsort.h"
+#include "hsort.h"
+#include "msort.h"
