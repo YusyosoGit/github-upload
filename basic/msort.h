@@ -1,8 +1,10 @@
 #ifndef _HSORT_H_
 #define _HSORT_H_
 
-// 高度な整列法
-// マージソート
+/* 高度な整列法 マージソート
+ * 応用情報技術者試験対策2019の第６章の問題２を
+ * 元にアルゴリズムを作成
+ */
 #include "sortbase.h"
 
 // 単方向リスト
@@ -30,22 +32,20 @@ private:
 	OnewayList<T> *get_sorted(OnewayList<T> *list);
 };
 
-// リストを２つに分ける
-// 戻り値は別れたもう片方のリストへのポインタ
+/* リストを２つに分ける
+ * 引数に分けるリスト
+ * 戻り値は別れたもう片方のリストへのポインタ
+ */
 template <typename T>
 OnewayList<T>* MSort<T>::divide(OnewayList<T> *list)
 {
 	OnewayList<T> *p1 = list;
-	OnewayList<T> *p2 = list->next == nullptr?
-		nullptr:
-		list->next->next;
-//	OnewayList *p2 = list->next;
-//	if (p2 != nullptr) p2= p2->next;
+	OnewayList<T> *p2 = list->next;
+	if (p2 != nullptr) p2= p2->next;
 	while (p2 != nullptr) {
 		p1 = p1->next;
-		p2 = p2->next == nullptr?
-			nullptr:
-			p2->next->next;
+		p2 = p2->next;
+		if (p2->next != nullptr) p2= p2->next;
 	}
 	// リストを分割する
 	OnewayList<T> *listEx= p1->next;
@@ -54,8 +54,10 @@ OnewayList<T>* MSort<T>::divide(OnewayList<T> *list)
 	return listEx;
 }
 
-// リスト１とリスト２を併合する。つまり２つのリスト同士でポインタのつなぎ替えを行う
-// リスト１とリスト２はどちらも nullptr ではいけない
+/* リスト１とリスト２を併合する。つまり２つのリスト同士でポインタのつなぎ替えを行う
+ * リスト１とリスト２はどちらも nullptr ではいけない
+ * 戻り値は統合されたリストの先頭ポインタ
+*/
 template <typename T>
 OnewayList<T> *MSort<T>::merge(OnewayList<T> *p1, OnewayList<T> *p2)
 {
@@ -85,7 +87,10 @@ OnewayList<T> *MSort<T>::merge(OnewayList<T> *p1, OnewayList<T> *p2)
 	return dhead.next;
 }
 
-// ソートしてないリストを渡し、ソートされたリストを取得する
+/* 未ソートリストを渡し、ソート済リストを取得する
+ * 引数に未ソートリストの先頭アドレス
+ * 戻り値はソート済リストの先頭アドレス
+ */
 template <typename T>
 OnewayList<T> *MSort<T>::get_sorted(OnewayList<T> *list)
 {
@@ -99,7 +104,9 @@ OnewayList<T> *MSort<T>::get_sorted(OnewayList<T> *list)
 	return merge(p1, p2);
 }
 
-// 単方向リストにデータを一時的に移し替えて処理を実行
+/* マージソートの実行
+ * 単方向リストにデータを一時的に移し替えて処理を実行
+ */
 template <typename T>
 void MSort<T>::exec()
 {
@@ -123,6 +130,7 @@ void MSort<T>::exec()
 	for (; p!= nullptr; p=p->next) {
 		m_elem[i++] = p->val;
 	}
+	delete [] ol;
 }
 
 #endif // _HSORT_H_
