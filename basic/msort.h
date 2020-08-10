@@ -41,12 +41,20 @@ OnewayList<T>* MSort<T>::divide(OnewayList<T> *list)
 {
 	OnewayList<T> *p1 = list;
 	OnewayList<T> *p2 = list->next;
+#if 0
 	if (p2 != nullptr) p2= p2->next;
 	while (p2 != nullptr) {
 		p1 = p1->next;
 		p2 = p2->next;
-		if (p2->next != nullptr) p2= p2->next;
+		if (p2 != nullptr) p2= p2->next;
 	}
+#else
+	// こちらのほうがスッキリしてよかろう
+	while (p2!= nullptr && (p2=p2->next) != nullptr) {
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+#endif
 	// リストを分割する
 	OnewayList<T> *listEx= p1->next;
 	p1->next = nullptr;
@@ -130,7 +138,7 @@ void MSort<T>::exec()
 	for (; p!= nullptr; p=p->next) {
 		m_elem[i++] = p->val;
 	}
-	delete [] ol;
+	//delete [] ol;
 }
 
 #endif // _HSORT_H_
