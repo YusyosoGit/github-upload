@@ -33,8 +33,8 @@ private:
 };
 
 /* リストを２つに分ける
- * 引数に分けるリスト
- * 戻り値は別れたもう片方のリストへのポインタ
+ * 引数に分けるリストの先頭アドレス
+ * 戻り値は分けたもう片方のリストの先頭アドレス
  */
 template <typename T>
 OnewayList<T>* MSort<T>::divide(OnewayList<T> *list)
@@ -55,7 +55,7 @@ OnewayList<T>* MSort<T>::divide(OnewayList<T> *list)
 }
 
 /* リスト１とリスト２を併合する。つまり２つのリスト同士でポインタのつなぎ替えを行う
- * リスト１とリスト２はどちらも nullptr ではいけない
+ * 引数にリスト１とリスト２の先頭アドレス。どちらも nullptr は不可
  * 戻り値は統合されたリストの先頭ポインタ
 */
 template <typename T>
