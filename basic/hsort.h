@@ -1,3 +1,7 @@
+/* C言語でヒープソート - Qiita
+ * https://qiita.com/omu58n/items/5c7cc358b1463c0a4710
+ */
+
 #ifndef _HEAPSORT_H_
 #define _HEAPOSRT_H_
 
