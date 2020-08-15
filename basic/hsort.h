@@ -44,7 +44,7 @@ template <typename T>
 void HSort<T>::exec()
 {
 	int sz = static_cast<int>(m_elem.size());
-	// 要素の先頭に無意味な値を挿入し、並び替えるべき配列の先頭のインデックスを１にする
+	// 要素の先頭に無意味な値を挿入することで、配列の先頭のインデックスを１に繰り下げる
 	m_elem.insert(m_elem.begin(), T());
 
 	// 整列した順序木を構成する
